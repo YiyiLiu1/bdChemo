@@ -15,7 +15,7 @@ In this vignette, we give an example illustrating the usage of R package bdChemo
 library("bdChemo")
 data(example)
 bd.example = bdChemo(x0, xtc, z, xt, bk,
-Niter = c(1e5,2e5,3e5,1e6,1.5e6,2e6,3e6,4e6,5e6,6e6,7e6,8e6,9e6,1e7,3e7),
+Niter = c(1,2,3,10,15,20,30,40,50,60,70,80,90,100,300) * 1e5,
 Nburn = 2e7, thin = 1e4, sa2l = .5, sa2m = 1, at = 10, bt = 1, al = 25, bl = 6,
 ql = .025, qu = .975, plot.name = "example", sample.return = F)
 ```
@@ -55,6 +55,6 @@ ic50.lower.bound = bd.example$summary[2,4]
 ic50.upper.bound = bd.example$summary[3,4]
 
 ## posterior samples of mu and lambda (can be used to calculate other summary statistics of interest)
-lambda.sample = bd.example$post.lambdsa
+lambda.sample = bd.example$post.lambda
 mu.sample = bd.example$post.mu
 ```
