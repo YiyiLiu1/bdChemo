@@ -11,7 +11,7 @@ To install the package, run:
 ~~~
 To get started, run:
 ~~~
-  load("bdChemo")
+  library("bdChemo")
   vignette("example", package="bdChemo")
 ~~~
 If you use this package, please cite the article below.
