@@ -17,7 +17,7 @@ data(example)
 bd.example = bdChemo(x0, xtc, z, xt, bk,
 Niter = c(1e5,2e5,3e5,1e6,1.5e6,2e6,3e6,4e6,5e6,6e6,7e6,8e6,9e6,1e7,3e7),
 Nburn = 2e7, thin = 1e4, sa2l = .5, sa2m = 1, at = 10, bt = 1, al = 25, bl = 6,
-ql = .025, qu = .975, plot.name = "example.pdf", sample.return = F)
+ql = .025, qu = .975, plot.name = "example", sample.return = F)
 ```
 
 The above call will produce a pdf file "example.pdf" with cell growth, birth and death rate curves as shown in Figure 3 of the manuscript. In addition, it also return a list "bd.example" with elements as described in users' manual. We will show the usage of these elements in the following code.
