@@ -93,10 +93,10 @@ ql = .025, qu = .975, plot.name = NULL, sample.return = F)
 	\item{summary}{
 	posterior means and credible intervals of \eqn{GI_{50}}, \eqn{TGI}, \eqn{LC_{50}}, \eqn{IC_{50}}; a matrix (columns for different variables)
 }
-	\itemn{post.lambda}{
+	\item{post.lambda}{
 	posterior samples of \eqn{\lambda} at \code{znew}, only returned if \code{sample.return = T}
 }
-	\itemn{post.mu}{
+	\item{post.mu}{
 	posterior samples of \eqn{\mu} at \code{znew}, only returned if \code{sample.return = T}
 }
  If "plot.name" is not NULL, also return plots of cell growth, birth and death estimations as shown in the main manuscript (curves and shades for mean and credible intervals, respectively)
