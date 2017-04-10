@@ -1,0 +1,10 @@
+Package: bdChemo
+Type: Package
+Title: Cell birth and death rates estimation
+Version: 0.1
+Date: 2017-02-16
+Author: Yiyi Liu <yiyi.liu@yale.edu>, Forrest Crawford <forrest.crawford@yale.edu>
+Maintainer: Yiyi Liu <yiyi.liu@yale.edu>
+VignetteBuilder: knitr
+Description: This package uses a Kendall Process-based mechanistic model of cell division and apoptosis to analyze chemo-sensitivity data. It provides estimations of dose-specific cell birth and death rates as well as commonly used summary statistics such as GI50, IC50, TGI and LC50.
+License: GPL-2

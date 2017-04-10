@@ -1,0 +1,7 @@
+bibentry(bibtype = "Article",
+         title = "Estimating dose-specific cell division and apoptosis rates from chemo-sensitivity experiments",
+         author = c(person(c("Yiyi", "Liu")),
+                    person(c("Forrest W.", "Crawford"))),
+         year = "2017",
+         journal = "submitted"
+        )
