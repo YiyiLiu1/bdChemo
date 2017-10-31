@@ -19,7 +19,7 @@ Niter = c(1,2,3,10,15,20,30,40,50,60,70,80,90,100,300) * 10,
 Nburn = 2000, thin = 1, sa2l = .5, sa2m = 1, at = 10, bt = 1, al = 25, bl = 6,
 ql = .025, qu = .975, plot.name = "example", sample.return = F)
 ## We set the number of iterations small here for illustration purpose
-## We suggest increase it to the scale of 1e7
+## We suggest increasing it to the scale of 1e7 in real data analysis
 ```
 
 The above call will produce a pdf file "example.pdf" with cell growth, birth and death rate curves as shown in Figure 3 of the manuscript. In addition, it also return a list "bd.example" with elements as described in users' manual. We will show the usage of these elements in the following code.
