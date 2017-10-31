@@ -7,7 +7,7 @@ To install the package, run:
 ~~~
   install.packages("devtools")
   library("devtools")
-  install_github("YiyiLiu1/bdChemo", build_vingettes = TRUE)
+  install_github("YiyiLiu1/bdChemo", build_vignettes = TRUE)
 ~~~
 To get started, run:
 ~~~
