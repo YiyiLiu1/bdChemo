@@ -15,8 +15,8 @@ In this vignette, we give an example illustrating the usage of R package bdChemo
 library("bdChemo")
 data(example)
 bd.example = bdChemo(x0, xtc, z, xt, bk,
-Niter = c(1,2,3,10,15,20,30,40,50,60,70,80,90,100,300) * 10,
-Nburn = 2000, thin = 10, sa2l = .5, sa2m = 1, at = 10, bt = 1, al = 25, bl = 6,
+Niter = c(1,2,3,10,15,20,30,40,50,60,70,80,90,100,300) * 100,
+Nburn = 20000, thin = 10, sa2l = .5, sa2m = 1, at = 10, bt = 1, al = 25, bl = 6,
 ql = .025, qu = .975, plot.name = "example", sample.return = F)
 ## We set the number of iterations small here for illustration purpose
 ## We suggest increasing it to the scale of 1e7 in real data analysis
