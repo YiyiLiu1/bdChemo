@@ -8,6 +8,7 @@ To install the package, run:
   install.packages("devtools")
   library("devtools")
   install_github("YiyiLiu1/bdChemo", build_vignettes = TRUE)
+  # There is a delay when setting build_vignettes = TRUE for running the example code
 ~~~
 To get started, run:
 ~~~
