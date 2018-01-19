@@ -5,7 +5,7 @@
 	Estimations of cell birth and death rates under drug interventions
 }
 \description{
-	Generate posterior estimations (mean and credible intervals) of dose-specific cell birth and death rates, and dose-response curve summary statistics \eqn{GI_{50}}, \eqn{TGI} and \eqn{LC_{50}}}.
+	Generate posterior estimations (mean and credible intervals) of dose-specific cell birth and death rates, and dose-response curve summary statistics \eqn{GI_{50}}, \eqn{TGI} and \eqn{LC_{50}}.
 }
 \usage{
 bdChemo(z, x0, xt, x0c, xtc, bk, N = 3e7, sa2l = .5, sa2m = 1, at = 10, bt = 1, al = 25, bl = 6, ql = .025, qu = .975, plot.name = NULL, sample.return = F)
@@ -84,10 +84,10 @@ bdChemo(z, x0, xt, x0c, xtc, bk, N = 3e7, sa2l = .5, sa2m = 1, at = 10, bt = 1, 
 	\item{summary}{
 	posterior means and credible intervals of \eqn{GI_{50}}, \eqn{TGI}, \eqn{LC_{50}}; a matrix (columns for different variables)
 }
-	\itemn{post.lambda}{
+	\item{post.lambda}{
 	posterior samples of \eqn{\lambda} at \code{znew}, only returned if \code{sample.return = T}
 }
-	\itemn{post.mu}{
+	\item{post.mu}{
 	posterior samples of \eqn{\mu} at \code{znew}, only returned if \code{sample.return = T}
 }
  If "plot.name" is not NULL, also return plots of cell growth, birth and death estimations as shown in the main manuscript (curves and shades for mean and credible intervals, respectively)
