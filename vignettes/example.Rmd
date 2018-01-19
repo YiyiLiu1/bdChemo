@@ -12,7 +12,9 @@ vignette: >
 In this vignette, we give an example illustrating the usage of R package bdChemo.
 
 Function bdChemo requires the following input:
-z: compound concentrations (in log10 scale); a vector
+
+z: compound concentrations (in $log_{10}$ scale); a vector
+
 x0: initial cell population sizes corresponding to concentrations in z; a vector (same length as z)
 xt: cell population sizes at follow-up time corresponding to concentrations in z; a vector (same length as z)
 x0c: control group (without compound treatment) initial cell population size; a scaler; for computing \eqn{GI_{50}}
