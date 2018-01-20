@@ -8,7 +8,9 @@
 	Generate posterior estimations (mean and credible intervals) of dose-specific cell birth and death rates, and dose-response curve summary statistics \eqn{GI_{50}}, \eqn{TGI} and \eqn{LC_{50}}.
 }
 \usage{
-bdChemo(z, x0, xt, x0c, xtc, bk, N = 3e7, sa2l = .5, sa2m = 1, at = 10, bt = 1, al = 25, bl = 6, ql = .025, qu = .975, plot.name = NULL, sample.return = F)
+bdChemo(z, x0, xt, x0c, xtc, bk, curve.plot, sample.return,
+N = 3e7, sa2l = .5, sa2m = 1, at = 10, bt = 1, al = 25, bl = 6,
+ql = .025, qu = .975)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -21,14 +23,20 @@ bdChemo(z, x0, xt, x0c, xtc, bk, N = 3e7, sa2l = .5, sa2m = 1, at = 10, bt = 1, 
   \item{xt}{
      cell population sizes at follow-up time corresponding to concentrations in z; a vector (same length as z)
 }
-  \item{xtc}{
+  \item{x0c}{
      control group (without compound treatment) initial cell population size; a scaler (if there are replicates, take average); used only for computing GI50
 }
   \item{xtc}{
      control group (without compound treatment) cell population size at follow-up time; a scaler (if there are replicates, take average); used only for computing GI50
 }    
   \item{bk}{
-     background noise measurements
+     background noise measurements; a vector
+}
+  \item{curve.plot}{
+     whether to produce cell growth, birth and death rates plots
+}
+  \item{sample.return}{
+  	 whether posterior samples of \eqn{\lambda} and \eqn{\lambda} should be returned
 }
   \item{N}{
      number of iterations;
@@ -57,12 +65,6 @@ bdChemo(z, x0, xt, x0c, xtc, bk, N = 3e7, sa2l = .5, sa2m = 1, at = 10, bt = 1, 
   \item{qu}{
      upper bound of credible interval intended to output
 }
-  \item{plot.name}{
-     file name for cell growth, birth and death rates plots; if NULL (default), do not output any figure
-}
-  \item{sample.return}{
-  	 whether posterior samples of \eqn{\lambda} and \eqn{\lambda} should be returned
-  }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -90,7 +92,7 @@ bdChemo(z, x0, xt, x0c, xtc, bk, N = 3e7, sa2l = .5, sa2m = 1, at = 10, bt = 1, 
 	\item{post.mu}{
 	posterior samples of \eqn{\mu} at \code{znew}, only returned if \code{sample.return = T}
 }
- If "plot.name" is not NULL, also return plots of cell growth, birth and death estimations as shown in the main manuscript (curves and shades for mean and credible intervals, respectively)
+ If "curve.plot" is T, also return plots of cell growth, birth and death estimations as shown in the main manuscript (curves and shades for mean and credible intervals, respectively)
 }
 \references{
  Liu Y. and Crawford F., Estimating dose-specific cell division and apoptosis rates from chemo-sensitivity experiments, submitted.
@@ -112,9 +114,10 @@ bdChemo(z, x0, xt, x0c, xtc, bk, N = 3e7, sa2l = .5, sa2m = 1, at = 10, bt = 1, 
 ##---- Should be DIRECTLY executable !! ----
 ##-- ==>  Define data, use random,
 ##--	or do  help(data=index)  for the standard data sets.
-library(bdChemo)
 data(example)
-bd.example = bdChemo(z, x0, xt, x0c, xtc, bk, N = 1e5, plot.name = "example")
+bd.example = bdChemo(example$z, example$x0, example$xt,
+example$x0c, example$xtc, example$bk, curve.plot = TRUE,
+sample.return = FALSE, N = 1e5)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
