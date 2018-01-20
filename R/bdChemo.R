@@ -1,27 +1,27 @@
 bdChemo <-
-function(z, x0, xt, x0c, xtc, bk, N = 3e7, sa2l = .5, sa2m = 1, at = 10, bt = 1, al = 25, bl = 6, ql = .025, qu = .975, plot.name = NULL, sample.return = F){
+function(z, x0, xt, x0c, xtc, bk, curve.plot, sample.return, N = 3e7, sa2l = .5, sa2m = 1, at = 10, bt = 1, al = 25, bl = 6, ql = .025, qu = .975){
 
-zs = sort(z,index.return=T)
+zs = sort(z,index.return=TRUE)
 z1 = zs$x
 xt1 = xt[zs$ix]
-    x01 = x0[zs$ix]
+x01 = x0[zs$ix]
 zt = as.data.frame(table(z1))
 nrep = zt[,2]
 n = length(nrep)
 zu = unique(z1)
-d = as.matrix(dist(zu,diag=T,upper=T))
+d = as.matrix(dist(zu,diag=TRUE,upper=TRUE))
 zstar=seq(zu[1]-0.1,zu[n]+0.1,length.out=100)
     
-    Niter = round(c(.003, .007, .01, 0.03, .05, .07, 0.1, .13, .17, .2, .23, .27, .3, .33, 1) * N, 1)
-    Nburn = round(.7 * N, 1)
-    thin = round(.0003 * N, 1)
+Niter = round(c(.003, .007, .01, 0.03, .05, .07, 0.1, .13, .17, .2, .23, .27, .3, .33, 1) * N, 1)
+Nburn = round(.7 * N, 1)
+thin = round(.0003 * N, 1)
 
 ns = cumsum(nrep)
 ls = sigma20 = var(bk)
 mubk0 = mean(bk)
 nbk = length(bk)
 
-    thin0 = thin
+thin0 = thin
 while ((Niter[4] - Niter[1])/(3*thin0) < 5*n){## if thin parameter is too large, not enough sample
 thin0 = thin0/10
 }
@@ -40,8 +40,8 @@ philambda0 = rnorm(n, alambda0)
 phimu0 = rnorm(n, amu0)
 lambda0 = exp(philambda0)
 mu0 = exp(phimu0)
-    km0 = kdlmean(x01,rep(lambda0, times = nrep),rep(mu0, times = nrep)) # nrep is a vector
-    kv0 = kdlvar(x01,rep(lambda0, times = nrep),rep(mu0, times = nrep))
+km0 = kdlmean(x01,rep(lambda0, times = nrep),rep(mu0, times = nrep)) # nrep is a vector
+kv0 = kdlvar(x01,rep(lambda0, times = nrep),rep(mu0, times = nrep))
 ll0 = normappll(xt1,km0,kv0,sigma20,bk,mubk0)
 gl0 = gfunc(d,l2lambda0)
 gcl0 = chol(gl0)
@@ -122,8 +122,8 @@ igcm0 = t(chol(chol2inv(gcm0)))
 
 lambda0 = exp(philambda0)
 mu0 = exp(phimu0)
-    km0 = kdlmean(x01,rep(lambda0, times = nrep),rep(mu0, times = nrep))
-    kv0 = kdlvar(x01,rep(lambda0, times = nrep),rep(mu0, times = nrep))
+km0 = kdlmean(x01,rep(lambda0, times = nrep),rep(mu0, times = nrep))
+kv0 = kdlvar(x01,rep(lambda0, times = nrep),rep(mu0, times = nrep))
 ll0 = normappll(xt1,km0,kv0,sigma20,bk,mubk0)
 
 for (k in 5:K){
@@ -227,13 +227,11 @@ lambdab = apply(lambdanew,2,quantile,c(ql,qu))
 mum = colMeans(munew)
 mub = apply(munew,2,quantile,c(ql,qu))
 
-if (!is.null(plot.name)){
-pdf(paste(plot.name,".pdf",sep=""))
+if (curve.plot){
 plot(zp,lambdam,xlab = "z",ylab = expression(lambda),type = "l",ylim = c(min(lambdab[1,]),max(lambdab[2,])), panel.first=polygon(c(zp,rev(zp)), c(lambdab[1,],rev(lambdab[2,])), col="#ccebc5", border=NA),col="green")
 plot(zp,mum,xlab = "z",ylab = expression(mu),type = "l",ylim = c(min(mub[1,]),max(mub[2,])), panel.first=polygon(c(zp,rev(zp)), c(mub[1,],rev(mub[2,])), col="#fbb4ae", border=NA), col="red")
 plot(zp,ksmean,type = "l",xlab = "z",ylab = "Follow-up cell counts / Initial cell counts",ylim = c(min(ksbound[1,],xt),min(max(ksbound[2,]),2*max(xt))), panel.first=polygon(c(zp,rev(zp)), c(ksbound[1,],rev(ksbound[2,])), col="#b3cde3", border=NA), col="blue")
         points(z, xt / x0, pch = 20)
-dev.off()
 }
 
 GI50 = TGI = LC50 = rep(0, length(est))
@@ -247,17 +245,17 @@ LC50[i] = 10^(lc50(ks[i,], zp, zid1))
 }
 
 stat = matrix(0,3,3)
-stat[,1] = c(mean(GI50, na.rm=T), quantile(GI50, c(ql, qu), na.rm=T))
-stat[,2] = c(mean(TGI, na.rm=T), quantile(TGI, c(ql, qu), na.rm=T))
-stat[,3] = c(mean(LC50, na.rm=T), quantile(LC50, c(ql, qu), na.rm=T))
+stat[,1] = c(mean(GI50, na.rm=TRUE), quantile(GI50, c(ql, qu), na.rm=TRUE))
+stat[,2] = c(mean(TGI, na.rm=TRUE), quantile(TGI, c(ql, qu), na.rm=TRUE))
+stat[,3] = c(mean(LC50, na.rm=TRUE), quantile(LC50, c(ql, qu), na.rm=TRUE))
 
 #hparas = apply(hpara[est,], 2, function(x) c(mean(x), quantile(x, c(ql, qu))))
 
 #ifelse (sample.return, return(list(hyperparameters = hparas, znew = zp, lambdas = rbind(lambdam, lambdab), mus = rbind(mum, mub), kmean = rbind(ksmean, ksbound), summary = stat, post.lambda = lambdanew, post.mu = munew)), return(list(hyperparameters = hparas, znew = zp, lambdas = rbind(lambdam, lambdab), mus = rbind(mum, mub), kmean = rbind(ksmean, ksbound), summary = stat)))
-    lambdas = rbind(lambdam, lambdab)
-    mus = rbind(mum, mub)
-    kmean = rbind(ksmean, ksbound)
-    row.names(lambdas) = row.names(mus) = row.names(kmean) = row.names(stat) = c("mean", "lower_bound", "upper_bound")
-    colnames(stat) = c("GI50", "TGI", "LC50")
-    ifelse (sample.return, return(list(znew = zp, lambdas = lambdas, mus = mus, kmean = kmean, summary = stat, post.lambda = lambdanew, post.mu = munew)), return(list(znew = zp, lambdas = lambdas, mus = mus, kmean = kmean, summary = stat)))
+lambdas = rbind(lambdam, lambdab)
+mus = rbind(mum, mub)
+kmean = rbind(ksmean, ksbound)
+row.names(lambdas) = row.names(mus) = row.names(kmean) = row.names(stat) = c("mean", "lower_bound", "upper_bound")
+colnames(stat) = c("GI50", "TGI", "LC50")
+ifelse (sample.return, return(list(znew = zp, lambdas = lambdas, mus = mus, kmean = kmean, summary = stat, post.lambda = lambdanew, post.mu = munew)), return(list(znew = zp, lambdas = lambdas, mus = mus, kmean = kmean, summary = stat)))
 }
