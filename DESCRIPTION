@@ -7,4 +7,5 @@ Author: Yiyi Liu <yiyi.liu@yale.edu>, Forrest Crawford <forrest.crawford@yale.ed
 Maintainer: Yiyi Liu <yiyi.liu@yale.edu>
 VignetteBuilder: knitr
 Description: This package uses a Kendall Process-based mechanistic model of cell division and apoptosis to analyze chemo-sensitivity data. It provides estimations of dose-specific cell birth and death rates as well as commonly used summary statistics such as GI50, IC50, TGI and LC50.
+biocViews: CellBiology, BiomedicalInformatics, Cheminformatics, Bayesian
 License: GPL-2
