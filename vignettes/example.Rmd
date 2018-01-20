@@ -19,6 +19,8 @@ Function bdChemo requires the following input:
 * x0c: control group (without compound treatment) initial cell population size; a scaler; for computing GI50
 * xtc: control group (without compound treatment) cell population size at follow-up time; a scaler; for computing GI50
 * bk: background noise measurements
+* curve.plot: whether to produce cell growth, birth and death rates plots
+* sample.return: whether posterior samples of \lambda and \lambda should be returned
 
 Other arguments with default values are:
 
@@ -31,17 +33,16 @@ Other arguments with default values are:
 * bl: prior gamma distribution rate parameter for l_\lambda^2 and l_\mu^2; al and bl together control the scale of l^2 in prior, which affects the smoothness of the estimated curve (l is called the length scale parameter of the Gaussian kernel, the larger l^2 is, the smoother the curve tends to be)
 * ql: lower bound of credible interval intended to output
 * qu: upper bound of credible interval intended to output
-* plot.name: file name for cell growth, birth and death rates plots; if NULL (default), do not output any figure
-* sample.return: whether posterior samples of \lambda and \lambda should be returned (default F)
+
 
 ```{r}
 library("bdChemo")
 data(example)
-bd.example = bdChemo(z, x0, xt, x0c, xtc, bk, N = 1e5, plot.name = "example")
+bd.example = bdChemo(example$z, example$x0, example$xt, example$x0c, example$xtc, example$bk, curve.plot = TRUE, sample.return = FALSE, N = 1e5)
 ```
 
 
-The above code will produce a pdf file "example.pdf" with cell growth, birth and death rate curves, similar to the one shown in Figure 3 of the manuscript (in the cell growth curve we plot cell counts normalized by initial cell population sizes since we allow the initial cell population sizes to be different across compound concentrations here). In addition, it also return a list "bd.example" with elements as described in users' manual. We will show the usage of these elements in the following code.
+The above code will plot cell growth, birth and death rate curves, similar to the one shown in Figure 3 of the manuscript (except that in the cell growth curve we plot cell counts normalized by initial cell population sizes since we allow the initial cell population sizes to be different across compound concentrations here). In addition, it also return a list "bd.example" with the following elements as described in users' manual. We will show the usage of these elements in the following code.
 
 
 ```{r}
