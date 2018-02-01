@@ -1,8 +1,8 @@
 Package: bdChemo
 Type: Package
 Title: Cell birth and death rates estimation
-Version: 0.99.0
-Date: 2018-01-18
+Version: 0.99.1
+Date: 2018-02-01
 Author: Yiyi Liu <yiyi.liu@yale.edu>, Forrest Crawford <forrest.crawford@yale.edu>
 Maintainer: Yiyi Liu <yiyi.liu@yale.edu>
 VignetteBuilder: knitr
