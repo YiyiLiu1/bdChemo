@@ -15,6 +15,7 @@ To get started, run:
 ~~~
   library("bdChemo")
   vignette("example", package="bdChemo")
+  ## Note, in this example, we use a small number of iterations (1e5) for a quick demonstration of the functionality of the package; in real data analysis, please set it to a larger number (~e6 to e7).
 ~~~
 If you use this package, please cite the article below.
 ~~~
