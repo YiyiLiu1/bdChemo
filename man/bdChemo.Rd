@@ -9,7 +9,7 @@
 }
 \usage{
 bdChemo(z, x0, xt, x0c, xtc, bk, curve.plot, sample.return,
-N = 3e7, sa2l = .5, sa2m = 1, at = 10, bt = 1, al = 25, bl = 6,
+N = 5e6, sa2l = .5, sa2m = 1, at = 10, bt = 1, al = 25, bl = 6,
 ql = .025, qu = .975)
 }
 %- maybe also 'usage' for other objects documented here.
