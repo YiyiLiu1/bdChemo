@@ -1,5 +1,5 @@
 bdChemo <-
-function(z, x0, xt, x0c, xtc, bk, curve.plot, sample.return, N = 3e7, sa2l = .5, sa2m = 1, at = 10, bt = 1, al = 25, bl = 6, ql = .025, qu = .975){
+function(z, x0, xt, x0c, xtc, bk, curve.plot, sample.return, N = 5e6, sa2l = .5, sa2m = 1, at = 10, bt = 1, al = 25, bl = 6, ql = .025, qu = .975){
 
 zs = sort(z,index.return=TRUE)
 z1 = zs$x
@@ -26,6 +26,10 @@ while ((Niter[4] - Niter[1])/(3*thin0) < 5*n){## if thin parameter is too large,
 thin0 = thin0/10
 }
 K = length(Niter)
+
+ks = lambdanew = munew = NULL
+for (chain in 1:10){
+
 hpara = matrix(0,Niter[K]/thin0,8)
 philambdas = phimus = matrix(0,Niter[K]/thin0,n)
 update = matrix(NA,Niter[K],5)
@@ -53,6 +57,7 @@ igcm0 = t(chol(chol2inv(gcm0)))
 siter = 1
 scl = gcl0*sqrt(t2lambda0/200)
 scm = gcm0*sqrt(t2mu0/200)
+
 
 for (k in 1:4){
 for (iter in siter:Niter[k]){
@@ -208,17 +213,22 @@ phimustar[i,] = ratestarsample(zstar,zu,phimus[est[i],],hpara[est[i],2],hpara[es
 }
 
 znew = c(zu,zstar)
-idx = order(znew)
-philambdanew = cbind(philambdas[est,],philambdastar)[,idx]
-phimunew = cbind(phimus[est,],phimustar)[,idx]
-ks = matrix(0,length(est),length(znew))
-lambdanew = exp(philambdanew)
-munew = exp(phimunew)
+idy = order(znew)
+philambdanew0 = cbind(philambdas[est,],philambdastar)[,idy]
+phimunew0 = cbind(phimus[est,],phimustar)[,idy]
+ks0 = matrix(0,length(est),length(znew))
+lambdanew0 = exp(philambdanew0)
+munew0 = exp(phimunew0)
 for (i in 1:length(est)){
-ks[i,] = kdlmean(1,lambdanew[i,],munew[i,])
+ks0[i,] = kdlmean(1,lambdanew0[i,],munew0[i,])
 }
 
-zp = znew[idx]
+lambdanew = rbind(lambdanew, lambdanew0)
+munew = rbind(munew, munew0)
+ks = rbind(ks, ks0)
+}
+
+zp = znew[idy]
 ksmean = apply(ks,2,mean)
 ksbound = apply(ks,2,quantile,c(ql,qu))
 
